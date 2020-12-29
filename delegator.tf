@@ -1,11 +1,6 @@
 resource "aws_iam_user" "delegator" {
-  name = "${var.stack_name}-${var.env}-${var.block_name}-dns-delegator"
-
-  tags = {
-    Stack       = var.stack_name
-    Environment = var.env
-    Block       = var.block_name
-  }
+  name = "${data.ns_workspace.this.hyphenated_name}-dns-delegator"
+  tags = data.ns_workspace.this.tags
 }
 
 resource "aws_iam_access_key" "delegator" {
