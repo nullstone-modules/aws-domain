@@ -1,6 +1,11 @@
 output "name" {
   value       = var.domain
-  description = "string ||| "
+  description = "string ||| The name of the created domain."
+}
+
+output "fqdn" {
+  value       = var.domain
+  description = "string ||| The FQDN (fully-qualified domain name) for the created domain."
 }
 
 output "zone_id" {
