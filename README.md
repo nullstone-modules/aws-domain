@@ -4,7 +4,7 @@ Nullstone Block standing up a domain in AWS Route53.
 
 ## Variables
 
-- `domain: string` - Domain to configure a DNS zone
+None
 
 ## Outputs
 
