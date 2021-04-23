@@ -1,10 +1,10 @@
 output "name" {
-  value       = var.domain
+  value       = data.ns_domain.this.dns_name
   description = "string ||| The name of the created domain."
 }
 
 output "fqdn" {
-  value       = var.domain
+  value       = data.ns_domain.this.dns_name
   description = "string ||| The FQDN (fully-qualified domain name) for the created domain."
 }
 
