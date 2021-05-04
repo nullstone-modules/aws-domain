@@ -1,5 +1,5 @@
 resource "aws_iam_user" "delegator" {
-  name = "${data.ns_workspace.this.hyphenated_name}-dns-delegator"
+  name = "dns-delegator-${local.resource_name}"
   tags = data.ns_workspace.this.tags
 }
 
