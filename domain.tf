@@ -1,6 +1,6 @@
 data "ns_domain" "this" {
-  stack = data.ns_workspace.this.stack
-  block = data.ns_workspace.this.block
+  stack_id = data.ns_workspace.this.stack_id
+  block_id = data.ns_workspace.this.block_id
 }
 
 resource "aws_route53_zone" "this" {
