@@ -1,0 +1,11 @@
+org_name: nullstone
+name: aws-domain
+friendly_name: Domain
+description: Creates a root DNS zone in AWS for the domain in Nullstone
+category: domain
+type: domain/aws
+appCategories: []
+layer: public-entry
+is_public: true
+provider_types:
+    - aws
