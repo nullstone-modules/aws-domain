@@ -3,9 +3,14 @@ name: aws-domain
 friendly_name: Domain
 description: Creates a root DNS zone in AWS for the domain in Nullstone
 category: domain
-type: domain/aws
-appCategories: []
-layer: public-entry
-is_public: true
+subcategory: ""
 provider_types:
     - aws
+platform: route53
+subplatform: ""
+type: domain/aws
+appCategories: []
+is_public: true
+tool_name: opentofu
+include: []
+source_url: https://github.com/nullstone-modules/aws-domain
