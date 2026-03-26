@@ -1,14 +1,36 @@
-resource "aws_iam_user" "delegator" {
-  name = "dns-delegator-${local.resource_name}"
-  tags = data.ns_workspace.this.tags
+locals {
+  delegator = {
+    role_arn         = aws_iam_role.delegator.arn
+    session_duration = 3600 // 1 hour
+  }
 }
 
-resource "aws_iam_access_key" "delegator" {
-  user = aws_iam_user.delegator.name
+resource "aws_iam_role" "delegator" {
+  name               = "dns-delegator-${local.resource_name}"
+  tags               = local.tags
+  assume_role_policy = data.aws_iam_policy_document.delegator_assume.json
 }
 
-resource "aws_iam_user_policy" "delegator" {
-  user   = aws_iam_user.delegator.name
+data "aws_iam_policy_document" "delegator_assume" {
+  statement {
+    effect = "Allow"
+
+    actions = [
+      "sts:AssumeRole",
+      "sts:SetSourceIdentity",
+      "sts:TagSession",
+    ]
+
+    principals {
+      type        = "AWS"
+      identifiers = [local.ns_agent_user_arn]
+    }
+  }
+}
+
+resource "aws_iam_role_policy" "delegator" {
+  name   = "AllowDNSDelegation"
+  role   = aws_iam_role.delegator.name
   policy = data.aws_iam_policy_document.delegator.json
 }
 
