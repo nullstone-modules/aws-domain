@@ -3,6 +3,8 @@ locals {
     role_arn         = aws_iam_role.delegator.arn
     session_duration = 3600 // 1 hour
   }
+
+  delegators = toset(concat(var.nullstone_delegators, [local.ns_agent_user_arn]))
 }
 
 resource "aws_iam_role" "delegator" {
@@ -23,7 +25,7 @@ data "aws_iam_policy_document" "delegator_assume" {
 
     principals {
       type        = "AWS"
-      identifiers = [local.ns_agent_user_arn]
+      identifiers = local.delegators
     }
   }
 }
